@@ -1,0 +1,32 @@
+[
+  {
+    "pk": 1,
+    "title": "Пылесос Samsung",
+    "description": "P = 2000W\r\nЦиклон-фильтр.",
+    "image": "",
+    "category_id": 1,
+    "price": "25600.00",
+    "created_at": "2024-05-03T12:35:49.890Z",
+    "updated_at": "2024-05-03T12:40:42.371Z"
+  },
+  {
+    "pk": 2,
+    "title": "Мясорубка Tefal",
+    "description": "P = 1500 W",
+    "image": "",
+    "category_id": 2,
+    "price": "4000.00",
+    "created_at": "2024-05-03T12:43:21.032Z",
+    "updated_at": "2024-05-03T12:43:21.032Z"
+  },
+  {
+    "pk": 3,
+    "title": "Системный блок",
+    "description": "i5 12500F, 16GB, GF 2060",
+    "image": "",
+    "category_id": 3,
+    "price": "50000.00",
+    "created_at": "2024-05-03T13:37:36.503Z",
+    "updated_at": "2024-05-03T13:37:36.503Z"
+  }
+]

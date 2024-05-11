@@ -7,12 +7,15 @@ from catalog.models import Product
 
 
 def main_page(request):
-    return render(request, "catalog/main.html")
+    context = {
+        'objects': Product.objects.all()
+    }
+    return render(request, "catalog/main.html", context)
 
 
 def product_detail(request, pk: int):
     context = {
-        'object': get_object_or_404(Product,pk=pk)
+        'object': get_object_or_404(Product, pk=pk)
     }
     return render(request, 'catalog/product_detail.html', context)
 

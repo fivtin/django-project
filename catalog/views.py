@@ -1,29 +1,23 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView, DetailView, TemplateView
 
 from catalog.models import Product
 
 
-# Create your views here.
+class ProductListView(ListView):
+    model = Product
 
 
-def main_page(request):
-    context = {
-        'objects': Product.objects.all()
-    }
-    return render(request, "catalog/main.html", context)
+class ProductDetailView(DetailView):
+    model = Product
 
 
-def product_detail(request, pk: int):
-    context = {
-        'object': get_object_or_404(Product, pk=pk)
-    }
-    return render(request, 'catalog/product_detail.html', context)
+class ContactsTemplateView(TemplateView):
+    template_name = "catalog/contacts.html"
 
-
-def contacts(request):
-    if request.POST:
+    def post(self, request, *args, **kwargs):
         name = request.POST.get("name")
         phone = request.POST.get("phone")
         message = request.POST.get("message")
         print(f"name: {name}, email: {phone}, message: {message}")
-    return render(request, "catalog/contacts.html")
+        return self.get(request, *args, **kwargs)

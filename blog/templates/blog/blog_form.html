@@ -1,0 +1,18 @@
+{% extends 'catalog/base.html' %}
+{% load media %}
+{% block content %}
+    <div class="row text-center">
+        <h2>Редактирование блога {{ object.title }}</h2>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if object %}
+        <button type="submit" class="btn btn-lg btn-block btn-success">Сохранить</button>
+        {% else %}
+        <button type="submit" class="btn btn-lg btn-block btn-primary">Создать</button>
+        {% endif %}
+        <a href="{% url 'blog:list' %}" type="button" class="btn btn-lg btn-block btn-warning">Отмена</a>
+        </form>
+    </div>
+{% endblock %}
+{% block banner %}{% endblock %}

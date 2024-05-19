@@ -1,0 +1,39 @@
+{% extends 'catalog/base.html' %}
+{% load media %}
+{% block content %}
+    <div class="row text-center">
+        <h2>Список блогов</h2>
+    </div>
+    <div class="row text-center">
+        <a href="{% url 'blog:create' %}" type="button" class="btn btn-sm btn-block btn-primary col-4 offset-4 mt-3 mb-3">Добавить новый блог</a>
+    </div>
+    <div class="row text-center">
+        {% for object in object_list %}
+        <div class="col-3">
+            <div class="card mb-4 box-shadow">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ object.title }}</h4>
+                </div>
+                <div class="card-body">
+                    {% if object.preview %}
+                    <img src="{% url_media_tag object.preview %}" width="100%" />
+                    {% endif %}
+                    <p>{{ object.content|slice:100 }}</p>
+                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                        <li>Создан: {{ object.created_at }}</li>
+                    </ul>
+                    {% if object.is_published %}
+                    <h5>Опубликовано</h5>
+                    {% else %}
+                    <h5>НеОпубликовано</h5>
+                    {% endif %}
+                    <a href="{% url 'blog:detail' object.pk %}" type="button" class="btn btn-sm btn-block btn-success">Просмотр</a>
+                    <a href="{% url 'blog:update' object.pk %}" type="button" class="btn btn-sm btn-block btn-primary">Изменить</a>
+                    <a href="{% url 'blog:delete' object.pk %}" type="button" class="btn btn-sm btn-block btn-danger">Удалить</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block banner %}{% endblock %}

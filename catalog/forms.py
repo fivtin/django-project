@@ -1,7 +1,7 @@
 from django import forms
 
 from catalog.funcs import check_banned_words
-from catalog.models import Product
+from catalog.models import Product, Version
 
 
 class ProductForm(forms.ModelForm):
@@ -13,6 +13,7 @@ class ProductForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
+            # django.forms.fields.CharField
             field.widget.attrs['class'] = 'form-control'
 
     def clean_title(self):
@@ -28,3 +29,18 @@ class ProductForm(forms.ModelForm):
         if banned_word:
             raise forms.ValidationError(f'Отказано. В описании продукта содержится запрещенное слово: {banned_word}.')
         return cleaned_data
+
+
+class VersionForm(forms.ModelForm):
+
+    class Meta:
+        model = Version
+        fields = ("product", "number", "title", "is_current", )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            # django.forms.fields.CharField
+            field.widget.attrs['class'] = 'form-control'
+            if isinstance(field, forms.fields.BooleanField):
+                field.widget.attrs['class'] += ' form-check-input'

@@ -40,3 +40,22 @@ class Product(models.Model):
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
         ordering = ('id', )
+
+
+class Version(models.Model):
+    """ A class that implements the 'version' model. """
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,  verbose_name='продукт')
+    number = models.CharField(max_length=32, verbose_name='номер версии')
+    title = models.CharField(max_length=128, verbose_name='название версии')
+    is_current = models.BooleanField(default=False, verbose_name='текущая')
+    created_at = models.DateTimeField(auto_now_add=True,  verbose_name='дата добавления')
+    updated_at = models.DateTimeField(auto_now=True,  verbose_name='дата изменения')
+
+    def __str__(self):
+        return f'{self.number}: {self.title}'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'
+        ordering = ('product', 'is_current', 'number', )

@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView, CreateView, UpdateView
 
 from catalog.forms import ProductForm
@@ -11,6 +12,9 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
+
+    def get_context_data(self):
+        return super().get_context_data()
 
 
 class ContactsTemplateView(TemplateView):
@@ -27,8 +31,10 @@ class ContactsTemplateView(TemplateView):
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
+    success_url = reverse_lazy('catalog:product_list')
 
 
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
+    success_url = reverse_lazy('catalog:product_list')

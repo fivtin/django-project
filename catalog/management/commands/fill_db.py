@@ -4,7 +4,7 @@ import os.path
 from django.core.management import BaseCommand
 
 from blog.models import Blog
-from catalog.models import Product, Category
+from catalog.models import Product, Category, Version
 from config.settings import BASE_DIR
 
 
@@ -25,14 +25,21 @@ class Command(BaseCommand):
         with open(os.path.join(BASE_DIR, 'fixtures', 'blogs.json'), encoding='utf-8') as f:
             return json.load(f)
 
+    @staticmethod
+    def json_read_versions():
+        with open(os.path.join(BASE_DIR, 'fixtures', 'versions.json'), encoding='utf-8') as f:
+            return json.load(f)
+
     def handle(self, *args, **options):
         Product.objects.all().delete()
         Category.objects.all().delete()
         Blog.objects.all().delete()
+        Version.objects.all().delete()
 
         product_for_create = []
         category_for_create = []
         blog_for_create = []
+        version_for_create = []
 
         for category in Command.json_read_categories():
             category_for_create.append(
@@ -58,3 +65,11 @@ class Command(BaseCommand):
             )
 
         Blog.objects.bulk_create(blog_for_create)
+
+        for version in Command.json_read_versions():
+            version_for_create.append(
+                Version(**version)
+            )
+
+        Version.objects.bulk_create(blog_for_create)
+

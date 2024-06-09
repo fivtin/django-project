@@ -1,0 +1,38 @@
+[
+  {
+    "pk": 1,
+    "product": 3,
+    "number": "1.5",
+    "title": "Геймерский дизайн",
+    "is_current": false,
+    "created_at": "2024-06-02T16:11:42.505Z",
+    "updated_at": "2024-06-02T16:11:42.505Z"
+  },
+  {
+    "pk": 2,
+    "product": 3,
+    "number": "1.1",
+    "title": "С жидкостным охлаждением",
+    "is_current": true,
+    "created_at": "2024-06-02T16:12:32.548Z",
+    "updated_at": "2024-06-02T18:40:22.766Z"
+  },
+  {
+    "pk": 3,
+    "product": 3,
+    "number": "2.0",
+    "title": "С улучшенным блоком питания",
+    "is_current": false,
+    "created_at": "2024-06-02T16:13:21.617Z",
+    "updated_at": "2024-06-02T18:40:22.766Z"
+  },
+  {
+    "pk": 4,
+    "product": 1,
+    "number": "5.6",
+    "title": "Фильтр-циклон",
+    "is_current": false,
+    "created_at": "2024-06-02T18:42:38.732Z",
+    "updated_at": "2024-06-02T18:43:33.317Z"
+  }
+]

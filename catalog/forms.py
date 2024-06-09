@@ -13,7 +13,6 @@ class ProductForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            # django.forms.fields.CharField
             field.widget.attrs['class'] = 'form-control'
 
     def clean_title(self):
@@ -40,7 +39,6 @@ class VersionForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            # django.forms.fields.CharField
             field.widget.attrs['class'] = 'form-control'
             if isinstance(field, forms.fields.BooleanField):
                 field.widget.attrs['class'] += ' form-check-input'

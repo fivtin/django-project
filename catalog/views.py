@@ -64,7 +64,6 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return context_data
 
     def form_valid(self, form):
-        print(self.request.user)
         formset = self.get_context_data()["formset"]
         self.object = form.save()
         if formset.is_valid():
@@ -85,5 +84,13 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = "/users/login"
+
     model = Product
     success_url = reverse_lazy('catalog:product_list')
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        if self.request.user == self.object.user:
+            return self.object
+        raise PermissionDenied

@@ -32,6 +32,8 @@ class Product(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='кто добавил', **NULLABLE)
 
+    is_published = models.BooleanField(default=False, verbose_name='опубликовано')
+
     def __str__(self):
         return f'{self.title}, цена: {self.price}'
 
@@ -39,6 +41,11 @@ class Product(models.Model):
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
         ordering = ('id', )
+        permissions = [
+            ('set_published', 'Can publish product'),
+            ('set_category', 'Can change category'),
+            ('set_description', 'Can change description'),
+        ]
 
 
 class Version(models.Model):

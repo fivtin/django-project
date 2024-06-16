@@ -14,7 +14,7 @@
             {{ form.as_p }}
         </div>
         <div class="col-6">
-            {% if object %}
+            {% if object and user == object.user %}
             <h4>Версии</h4>
             {{ formset.management_form }}
             {% for form in formset.forms %}

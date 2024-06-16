@@ -13,3 +13,9 @@ class Command(BaseCommand):
         user.is_active = True
         user.is_superuser = True
         user.save()
+
+        user = User.objects.create(email='moderator@admin.admin')
+        user.set_password('654321')
+        user.is_staff = True
+        user.is_active = True
+        user.save()

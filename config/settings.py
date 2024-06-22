@@ -83,10 +83,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django5',
+        'NAME': os.getenv('PG_DATABASE_NAME'),
         'USER': os.getenv('PG_DATABASE_USER'),
         'PASSWORD': os.getenv('PG_DATABASE_PASSWORD'),
-        'HOST': 'localhost',
+        'HOST': os.getenv('PG_DATABASE_HOST'),
+        'PORT':  os.getenv('PG_DATABASE_PORT', '5432'),
     }
 }
 
@@ -143,20 +144,21 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLC = False
-EMAIL_USE_SSL = True
+EMAIL_USE_TLC = os.getenv('EMAIL_USE_TLC') == 'True'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL') == 'True'
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CACHE_ENABLED = os.getenv('REDIS_CACHE_ENABLED') == 'True'
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv("REDIS_LOCATION"),
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.getenv("REDIS_LOCATION"),
+        }
     }
-}

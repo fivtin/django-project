@@ -1,0 +1,20 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h3 class="display-6">Список доступных категорий</h3>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="text-center">
+            <ul class="list-group">
+                {% for object in object_list %}
+                <li class="list-group-item list-group-item-action list-group-item-info mb-3">{{ object.title }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block banner %}{% endblock %}
